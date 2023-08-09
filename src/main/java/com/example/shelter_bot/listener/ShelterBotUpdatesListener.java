@@ -1,5 +1,6 @@
 package com.example.shelter_bot.listener;
 
+import com.example.shelter_bot.service.NotificationUserService;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Message;
@@ -8,22 +9,31 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class ShelterBotUpdatesListener implements UpdatesListener {
 
     private Logger logger = LoggerFactory.getLogger(ShelterBotUpdatesListener.class);
 
-    @Autowired
-    private TelegramBot telegramBot;
+   // private final Pattern pattern=Pattern.compile("(\\s+([\u041A\u043E\u0448\u043A\u0443\\d\\s.,!?:]+) ||" +
+    //        " (\\s+([\u0421\u043E\u0431\u0430\u043A\u0443\\d\\s.,!?:]+) ");
+
+    private final TelegramBot telegramBot;
+   // private final NotificationUserService notificationUserService;
+
+    public ShelterBotUpdatesListener(NotificationUserService notificationUserService, TelegramBot telegramBot) {
+       // this.notificationUserService = notificationUserService;
+        this.telegramBot = telegramBot;
+    }
 
     @PostConstruct
     public void init() {
+
         telegramBot.setUpdatesListener(this);
     }
 
@@ -41,12 +51,16 @@ public class ShelterBotUpdatesListener implements UpdatesListener {
                         if ("/start".equals(text)) {
                             sendMessage(chatId, """
                                     Привет! Это бот приюта для кошек и собак!
-                                    Кого бы вы хотели себе выбрать?
+                                    Кого бы вы хотели себе выбрать? Напишите кошку или собаку
                                                 """);
 
-                        } else {
-                            sendMessage(chatId, "Некорректный тип данных!");
-                        }
+                        } else if(text!=null){
+
+                           // Matcher matcher = pattern.matcher(text);
+
+                            sendMessage(chatId, "Некорректный тип данных");
+
+                                }
                     });
     } catch (Exception e) {
         logger.error(e.getMessage(),e);
@@ -63,3 +77,4 @@ public class ShelterBotUpdatesListener implements UpdatesListener {
     }
 
 }
+
