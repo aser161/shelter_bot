@@ -52,6 +52,7 @@ public class ShelterBotUpdatesListener implements UpdatesListener {
                         String text = message.text();     //получаем текст сообщения
 
                         if ("/start".equals(text)) {
+
                            SendMessage sendMessage=new SendMessage(chatId, """
                                     Привет! Это бот приюта для кошек и собак!
                                     Кого бы вы хотели себе выбрать?
@@ -64,9 +65,17 @@ public class ShelterBotUpdatesListener implements UpdatesListener {
                             sendMessage.replyMarkup(keyboard);
                             telegramBot.execute(sendMessage);
 
-                        } else if(text!=null) {
+                        } else if(text !=null) {
 
                             sendMessage(chatId, "Некорректный тип данных");
+                        }
+                          if(update.callbackQuery() != null && "Кошку".equals(update.callbackQuery().data())) {
+                            // нажата кнопка про кошек
+
+                              telegramBot.execute(new SendMessage(chatId, "Добро пожаловать в приют для кошек."));
+                        }  if(update.callbackQuery() != null && "Собаку".equals(update.callbackQuery().data())) {
+                            // нажата кнопка про собак
+                            telegramBot.execute(new SendMessage(chatId, "Добро пожаловать в приют для собак."));
                         }
 
 
