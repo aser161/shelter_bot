@@ -1,19 +1,12 @@
 package com.example.shelter_bot.entity;
 
 
-import org.hibernate.annotations.Table;
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 @Entity
-@Table (appliesTo = "notification_users")
+@Table(name = "notification_users")
 
 public class NotificationUser {
-    @javax.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -62,3 +55,4 @@ public class NotificationUser {
         this.userTelephone = userTelephone;
     }
 }
+
