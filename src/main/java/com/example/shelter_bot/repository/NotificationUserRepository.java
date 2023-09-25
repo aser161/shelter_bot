@@ -9,6 +9,12 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Interface CatRepository.
+ * @author Lubava
+ * @version 1.0.0
+ */
+
 public interface NotificationUserRepository extends JpaRepository<NotificationUser,Long> {
 
    // List<NotificationUser> findAllByNotificationUAndUserIdAndChatIdAndChatId();

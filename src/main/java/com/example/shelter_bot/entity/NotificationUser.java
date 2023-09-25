@@ -3,6 +3,12 @@ package com.example.shelter_bot.entity;
 
 import javax.persistence.*;
 
+/**
+ * Interface CatRepository.
+ * @author Lubava
+ * @version 1.0.0
+ */
+
 @Entity
 @Table(name = "notification_users")
 
