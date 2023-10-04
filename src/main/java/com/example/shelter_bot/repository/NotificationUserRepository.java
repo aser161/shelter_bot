@@ -19,7 +19,7 @@ public interface NotificationUserRepository extends JpaRepository<NotificationUs
 
    // List<NotificationUser> findAllByNotificationUAndUserIdAndChatIdAndChatId();
 
-
+    boolean save(NotificationUser notificationUser);
     // @Modifying
    // @Query("DELETE FROM NotificationUser WHERE message like %:nameLike%")
    // void removeAllLike(@Param("nameLike") String nameLike);
